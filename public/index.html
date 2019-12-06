@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Dale chat</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div class="app">
+      <div id="messages">
+        <div class="message us">Hello dialog flow</div>
+        <div class="message them">Howdy dale</div>
+      </div>
+      <form id="msg-form" action="">
+        <input id="msg-input" autocomplete="off" /><button>Send</button>
+      </form>
+    </div>
+
+    <script defer src="/__/firebase/7.5.0/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.5.0/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.5.0/firebase-database.js"></script>
+    <script defer src="/__/firebase/7.5.0/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.5.0/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+    <script src="./script.js"></script>
+    </script>
+  </body>
+</html>
