@@ -1,9 +1,6 @@
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 const functions = require("firebase-functions");
 const { TranslationServiceClient } = require("@google-cloud/translate");
-const cors = require("cors")({ origin: true });
-
-require("dotenv").config();
 
 const dialogflow = require("dialogflow");
 const uuid = require("uuid/v4");
@@ -18,7 +15,7 @@ async function translateText(text, targetLang = "en-US") {
 
   // Construct request
   const request = {
-    parent: `projects/${process.env.PROJECT_ID}/locations/us-central1`,
+    parent: `projects/${functions.config().chat.projectid}/locations/us-central1`,
     contents: [text],
     mimeType: "text/plain", // mime types: text/plain, text/html
     targetLanguageCode: targetLang
@@ -37,7 +34,7 @@ async function getIntent(msg, sessionId) {
   // Create a new session
   const sessionClient = new dialogflow.SessionsClient();
   const sessionPath = sessionClient.sessionPath(
-    process.env.PROJECT_ID,
+    functions.config().chat.projectid,
     sessionId
   );
   const request = {
@@ -61,8 +58,6 @@ async function getIntent(msg, sessionId) {
 }
 
 exports.translateText = functions.https.onRequest(async (req, res) => {
-  cors(req, res, () => {});
-
   const reply = await translateText(req.body.text, req.body.targetLang);
   res.json({
     detectedLanguageCode: reply["languageCode"],
@@ -71,7 +66,6 @@ exports.translateText = functions.https.onRequest(async (req, res) => {
 });
 
 exports.getIntent = functions.https.onRequest(async (req, res) => {
-  cors(req, res, () => {});
   const sessionId = uuid();
   const result = await getIntent(req.body.text, sessionId);
   res.json({
@@ -81,10 +75,8 @@ exports.getIntent = functions.https.onRequest(async (req, res) => {
 });
 
 exports.translateIntent = functions.https.onRequest(async (req, res) => {
-  cors(req, res, () => {});
-
   const sessionId = req.body.sessionId;
-    console.log("Session id ", sessionId);
+  console.log("Session id ", sessionId);
   const enQuery = await translateText(req.body.text, "en-US");
   const languageCode = enQuery.languageCode;
   console.log("Language code " + languageCode);

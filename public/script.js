@@ -1,5 +1,4 @@
-RESPONSE_URL =
-  "http://localhost:5000/translationchat-hvjswp/us-central1/translateIntent";
+RESPONSE_URL = `${window.location.origin}/translateIntent`;
 
 sessionId = String(Math.floor(Math.random() * 1000000000000));
 
@@ -18,7 +17,6 @@ async function postData(url, data = {}) {
   const response = await fetch(url, {
     method: "POST", // *GET, POST, PUT, DELETE, etc.
     mode: "cors", // no-cors, *cors, same-origin
-    // credentials: 'same-origin', // include, *same-origin, omit
     headers: {
       "Content-Type": "application/json"
     },
