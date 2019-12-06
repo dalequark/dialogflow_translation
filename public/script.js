@@ -3,8 +3,6 @@ RESPONSE_URL =
 
 sessionId = String(Math.floor(Math.random() * 1000000000000));
 
-console.log("Hello world");
-
 function addNewMessage(msg, sender = "self") {
   const divNode = document.createElement("div");
   divNode.className = sender == "self" ? "message us" : "message : them";
@@ -35,7 +33,6 @@ async function getResponse(msg) {
     text: msg,
     sessionId: sessionId
   });
-  console.log(jsonRes);
   return jsonRes;
 }
 
@@ -47,7 +44,6 @@ document
     addNewMessage(msg);
     document.getElementById("msg-form").reset();
     document.getElementById("msg-input").innerText = "";
-    console.log(msg);
     getResponse(msg).then(reply => {
       addNewMessage(reply.replyText, "them");
     });

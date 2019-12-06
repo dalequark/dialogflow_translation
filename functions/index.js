@@ -12,8 +12,6 @@ const uuid = require("uuid/v4");
 const admin = require("firebase-admin");
 admin.initializeApp();
 
-console.log(`Got project ${process.env.PROJECT_ID}`);
-
 async function translateText(text, targetLang = "en-US") {
   // Instantiates a client
   const translationClient = new TranslationServiceClient();
