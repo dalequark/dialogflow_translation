@@ -47,7 +47,7 @@ document.getElementById('msg-form').addEventListener('submit', async function(e)
     document.getElementById('msg-input').innerText = '';
     console.log(msg);
     getResponse(msg).then((reply) => {
-        addNewMessage(reply.replyText, "them")
+        addNewMessage(reply.replyText, "them");
     });
     return true;
 });

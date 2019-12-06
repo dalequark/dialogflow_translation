@@ -15,5 +15,8 @@
     "firebase-functions": "^3.3.0",
     "uuid": "^3.3.3"
   },
-  "private": true
+  "private": true,
+  "engines": {
+    "node": "8"
+  }
 }

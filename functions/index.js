@@ -93,6 +93,7 @@ exports.translateIntent = functions.https.onRequest(async (req, res) => {
   console.log("Language code " + languageCode);
   const enRequest = enQuery.translatedText;
 
+  console.log("Getting intent for ", enRequest);
   const enReply = await getIntent(enRequest, sessionId);
 
   // Translate back to the speakers origin language
@@ -104,7 +105,7 @@ exports.translateIntent = functions.https.onRequest(async (req, res) => {
   res.json({
     detectedLanguage: languageCode,
     intent: enReply.intent,
-    replyText: translatedReply ? translatedReply : enReply,
-    enReply: enReply,
+    replyText: translatedReply ? translatedReply : enReply.replyText,
+    enReply: enReply.replyText,
   });
 });
