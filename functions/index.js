@@ -62,7 +62,6 @@ async function getIntent(msg, sessionId) {
   }
 }
 
-// Call with body including text and targetLang
 exports.translateText = functions.https.onRequest(async (req, res) => {
   cors(req, res, () => {});
 
