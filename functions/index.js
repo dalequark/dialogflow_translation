@@ -63,7 +63,7 @@ async function getIntent(msg, sessionId) {
 }
 
 // Call with body including text and targetLang
-exports.setLanguage = functions.https.onRequest(async (req, res) => {
+exports.translateText = functions.https.onRequest(async (req, res) => {
   cors(req, res, () => {});
 
   const reply = await translateText(req.body.text, req.body.targetLang);
@@ -87,7 +87,7 @@ exports.translateIntent = functions.https.onRequest(async (req, res) => {
   cors(req, res, () => {});
 
   const sessionId = req.body.sessionId;
-
+    console.log("Session id ", sessionId);
   const enQuery = await translateText(req.body.text, "en-US");
   const languageCode = enQuery.languageCode;
   console.log("Language code " + languageCode);

@@ -1,7 +1,7 @@
 
 RESPONSE_URL = "http://localhost:5000/translationchat-hvjswp/us-central1/translateIntent";
 
-sessionId = Math.floor(Math.random() * 1000000000000);
+sessionId = String(Math.floor(Math.random() * 1000000000000))
 
 function addNewMessage(msg, sender = "self") {
     const divNode = document.createElement('div');
