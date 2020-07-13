@@ -4,6 +4,7 @@ const { TranslationServiceClient } = require("@google-cloud/translate");
 
 const dialogflow = require("dialogflow");
 const uuid = require("uuid/v4");
+require('dotenv').config();
 
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 const admin = require("firebase-admin");
@@ -15,7 +16,7 @@ async function translateText(text, targetLang = "en-US") {
 
   // Construct request
   const request = {
-    parent: `projects/${functions.config().chat.projectid}/locations/us-central1`,
+    parent: `projects/${process.env.PROJECT_ID}/locations/us-central1`,
     contents: [text],
     mimeType: "text/plain", // mime types: text/plain, text/html
     targetLanguageCode: targetLang
@@ -34,7 +35,7 @@ async function getIntent(msg, sessionId) {
   // Create a new session
   const sessionClient = new dialogflow.SessionsClient();
   const sessionPath = sessionClient.sessionPath(
-    functions.config().chat.projectid,
+    process.env.PROJECT_ID,
     sessionId
   );
   const request = {
